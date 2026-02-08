@@ -16,6 +16,10 @@ import { Colors } from "@/src/constant/colors";
 import { FontSize } from "@/src/constant/fontSize";
 
 //Lib
+import {
+  startForegroundService,
+  stopForegroundService,
+} from "@/src/lib/helper/foregroundService";
 import { registerForPushNotificationsAsync } from "@/src/lib/helper/pushNotificationService";
 
 //Service
@@ -97,6 +101,10 @@ const HomePage = () => {
       await newRecording.prepareToRecordAsync(recordingOptions);
       await newRecording.startAsync();
 
+      if (Platform.OS === "android") {
+        await startForegroundService();
+      }
+
       setRecording(newRecording);
       setIsRecording(true);
       setIsPaused(false);
@@ -145,6 +153,10 @@ const HomePage = () => {
       setIsRecording(false);
       setIsPaused(false);
       setRecordDuration(0);
+
+      if (Platform.OS === "android") {
+        await stopForegroundService();
+      }
 
       // if (uri) {
       //   try {

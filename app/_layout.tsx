@@ -1,4 +1,5 @@
 import { Colors } from "@/src/constant/colors";
+import notifee from "@notifee/react-native";
 import * as Notifications from "expo-notifications";
 import { Stack } from "expo-router";
 import { StatusBar, StyleSheet, View } from "react-native";
@@ -17,6 +18,12 @@ Notifications.setNotificationHandler({
       shouldShowBanner: true,
       shouldShowList: true,
     }),
+});
+
+notifee.registerForegroundService(() => {
+  return new Promise(() => {
+    console.log("CALLED FOREGROUND SERVICE NOTIFEE");
+  });
 });
 
 export default function RootLayout() {

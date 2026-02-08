@@ -32,6 +32,12 @@
 
     "plugins": [
       "./plugins/dist/withBackgroundAudio",
+      [
+        "@notifee/react-native/plugin",
+        {
+          "headless": true
+        }
+      ],
       "expo-router",
       "expo-notifications"
     ],
