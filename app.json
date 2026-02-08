@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "icon": "./assets/images/app_logo.png",
 
     "ios": {
       "supportsTablet": true,
@@ -17,6 +18,11 @@
 
     "android": {
       "package": "com.aurelsondakh.inpersonmeetingnotes",
+      "googleServicesFile": "./google-services.json",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/app_logo.png",
+        "backgroundColor": "#FFFFFF"
+      },
       "edgeToEdgeEnabled": true
     },
 
@@ -24,7 +30,11 @@
       "output": "static"
     },
 
-    "plugins": ["./plugins/dist/withBackgroundAudio", "expo-router"],
+    "plugins": [
+      "./plugins/dist/withBackgroundAudio",
+      "expo-router",
+      "expo-notifications"
+    ],
 
     "experiments": {
       "typedRoutes": true

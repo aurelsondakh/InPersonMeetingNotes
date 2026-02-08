@@ -1,36 +1,41 @@
+import { Colors } from "@/src/constant/colors";
+import * as Notifications from "expo-notifications";
 import { Stack } from "expo-router";
-import { ActivityIndicator, StatusBar, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useAuth } from "../hooks/useAuth";
+import { StatusBar, StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+
+//Lib
+import { useNotificationHandler } from "@/src/hooks/useNotification";
+
+// ✅ WAJIB: di luar component
+Notifications.setNotificationHandler({
+  handleNotification:
+    async (): Promise<Notifications.NotificationBehavior> => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: false,
+      shouldShowBanner: true,
+      shouldShowList: true,
+    }),
+});
 
 export default function RootLayout() {
-  const { loading, user } = useAuth();
-
-  if (loading) {
-    return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <ActivityIndicator size="large" />
-        </View>
-      </SafeAreaView>
-    );
-  }
-
-  console.log(user, "INI USER");
+  const insets = useSafeAreaInsets();
+  useNotificationHandler();
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar
-        barStyle="dark-content"
-        backgroundColor="#ffffff"
-        hidden={false}
-        translucent={false}
-      />
+    <View style={[styles.container, { paddingTop: insets.top }]}>
+      <StatusBar barStyle="dark-content" />
       <Stack screenOptions={{ headerShown: false }}>
-        {user ? <Stack.Screen name="(auth)" /> : <Stack.Screen name="(auth)" />}
+        <Stack.Screen name="(tabs)" />
       </Stack>
-    </SafeAreaView>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.white,
+  },
+});

@@ -49,6 +49,8 @@ const withBackgroundAudio: ConfigPlugin = (config) => {
 
     ensurePermission("android.permission.RECORD_AUDIO");
     ensurePermission("android.permission.FOREGROUND_SERVICE");
+    ensurePermission("android.permission.FOREGROUND_SERVICE_MICROPHONE");
+    ensurePermission("android.permission.WAKE_LOCK");
 
     manifest["uses-permission"] = permissions;
 

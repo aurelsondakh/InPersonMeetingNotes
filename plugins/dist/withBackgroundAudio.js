@@ -38,6 +38,7 @@ const withBackgroundAudio = (config) => {
         };
         ensurePermission("android.permission.RECORD_AUDIO");
         ensurePermission("android.permission.FOREGROUND_SERVICE");
+        ensurePermission("android.permission.FOREGROUND_SERVICE_MICROPHONE");
         manifest["uses-permission"] = permissions;
         /**
          * Foreground service
