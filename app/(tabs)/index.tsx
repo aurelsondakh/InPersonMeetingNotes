@@ -21,6 +21,7 @@ import {
   stopForegroundService,
 } from "@/src/lib/helper/foregroundService";
 import { registerForPushNotificationsAsync } from "@/src/lib/helper/pushNotificationService";
+import { uploadMeetingAudio } from "@/src/services/meetingService";
 
 //Service
 
@@ -158,19 +159,19 @@ const HomePage = () => {
         await stopForegroundService();
       }
 
-      // if (uri) {
-      //   try {
-      //     console.log("TRY UPLOAD");
-      //     const response = await uploadMeetingAudio(
-      //       uri,
-      //       meetingId,
-      //       expoPushToken,
-      //     );
-      //     console.log("Backend response:", response);
-      //   } catch (err) {
-      //     console.error("Error uploading audio:", err);
-      //   }
-      // }
+      if (uri) {
+        try {
+          console.log("TRY UPLOAD");
+          const response = await uploadMeetingAudio(
+            uri,
+            meetingId,
+            expoPushToken,
+          );
+          console.log("Backend response:", response);
+        } catch (err) {
+          console.error("Error uploading audio:", err);
+        }
+      }
     } catch (err) {
       console.error(err);
     }
